@@ -9,25 +9,25 @@
 
 void counting_sort(int *array, size_t size)
 {
-	size_t i, max;
-	int old, total = 0;
+	size_t i, highest;
+	int old, sum = 0;
 	int *count, *new;
 
 	if (array == NULL || size < 2)
 		return;
-	max = find_max(array, size);
-	count = malloc(sizeof(int) * (max + 1));
+	highest = find_highest(array, size);
+	count = malloc(sizeof(int) * (highest + 1));
 	if (count == NULL)
 		return;
 	for (i = 0; i < size; i++)
 		++count[array[i]];
-	for (i = 0; i <= max; i++)
+	for (i = 0; i <= highest; i++)
 	{
 		old = count[i];
-		count[i] += total;
-		total += old;
+		count[i] += sum;
+		sum += old;
 	}
-	print_array(count, max + 1);
+	print_array(count, highest + 1);
 	new = malloc(sizeof(int) * size);
 	if (new == NULL)
 	{
@@ -46,21 +46,21 @@ void counting_sort(int *array, size_t size)
 }
 
 /**
- * find_max - finds the highest number in an array
+ * find_highest - finds the highest number in an array
  * @array: array
  * @size: size of the array
  * Return: highest number in the array
  */
 
-int find_max(int *array, size_t size)
+int find_highest(int *array, size_t size)
 {
 	size_t i;
-	int max = 0;
+	int highest = 0;
 
 	for (i = 0; i < size; i++)
 	{
-		if (array[i] > max)
-			max = array[i];
+		if (array[i] > highest)
+			highest = array[i];
 	}
-	return (max);
+	return (highest);
 }
