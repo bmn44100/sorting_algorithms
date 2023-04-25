@@ -23,13 +23,13 @@ void quick_sort_hoare(int *array, size_t size)
 
 void qsh(int *array, ssize_t start, ssize_t end, size_t size)
 {
-	ssize_t p_i;
+	ssize_t int_index;
 
 	if (start < end)
 	{
-		p_i = partition_h(array, start, end, size);
-		qsh(array, start, p_i - 1, size);
-		qsh(array, p_i, end, size);
+		int_index = partition_h(array, start, end, size);
+		qsh(array, start, int_index - 1, size);
+		qsh(array, int_index, end, size);
 	}
 }
 
@@ -45,19 +45,19 @@ void qsh(int *array, ssize_t start, ssize_t end, size_t size)
 ssize_t partition_h(int *array, ssize_t start, ssize_t end, size_t size)
 {
 	ssize_t left, right;
-	int pivot;
+	int shift;
 
-	pivot = array[end];
+	shift = array[end];
 	left = start - 1;
 	right = end + 1;
 	while (1)
 	{
 		do {
 			left++;
-		} while (array[left] < pivot);
+		} while (array[left] < shift);
 		do {
 			right--;
-		} while (array[right] > pivot);
+		} while (array[right] > shift);
 		if (left >= right)
 			return (left);
 		swap(&array[left], &array[right]);
